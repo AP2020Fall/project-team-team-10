@@ -22,4 +22,7 @@ public class PlayerMenu extends Menu {
     public void logout(){
 
     }
+    public void openMainMenu(){
+
+    }
 }

@@ -35,6 +35,9 @@ public class AdminMenu extends Menu {
     public void viewUser(){
 
     }
+    public void openMainMenu(){
+
+    }
 
 
 }
