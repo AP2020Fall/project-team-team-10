@@ -64,4 +64,10 @@ public class Player extends Account{
     public void setReqList(ArrayList<Friends> reqList) {
         this.reqList = reqList;
     }
+
+
+    public ArrayList<Player> addFriends(Player playerID){
+
+    }
+
 }

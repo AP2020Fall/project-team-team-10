@@ -7,4 +7,6 @@ public class AccountController {
     public void editPanel(String panelName,String newPanelName){
 
     }
+
+
 }

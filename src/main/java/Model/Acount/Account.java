@@ -13,7 +13,7 @@ public class Account {
     public String phoneNumber;
     protected static List<Account> list = new ArrayList<>();
 
-
+/*************** constructor **********/
     public Account(String name, String familyName, String userName, String ID, String password, String email, String phoneNumber) {
         this.name = name;
         this.familyName = familyName;
@@ -32,7 +32,7 @@ public class Account {
     public static List<Account> getList() {
         return list;
     }
-
+/********************** getter and setter ************/
     public String getName() {
         return name;
     }
@@ -88,5 +88,24 @@ public class Account {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    /***************** edit and remove account*********************/
+
+    public void changeFirstName(String name) {
+    }
+
+    public void changeLastName(String name) {
+    }
+
+    public void changeEmail(String Email) {
+        this.email = Email;
+    }
+    public void removeAccount(Account account){
+
+    }
+
+
+
+
 }
 

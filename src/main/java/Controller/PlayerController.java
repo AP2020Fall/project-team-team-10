@@ -19,5 +19,8 @@ public class PlayerController {
 
     }
 
+    public List<Player> searchFriend(){
+
+    }
 
 }
