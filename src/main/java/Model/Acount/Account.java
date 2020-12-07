@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Account {
-    public String name;
-    public String familyName;
-    public String userName;
-    public String ID;
-    public String password;
-    public String email;
-    public String phoneNumber;
+    protected String name;
+    protected String familyName;
+    protected String userName;
+    protected String ID;
+    protected String password;
+    protected String email;
+    protected String phoneNumber;
     protected static List<Account> list = new ArrayList<>();
 
 /*************** constructor **********/
-    public Account(String name, String familyName, String userName, String ID, String password, String email, String phoneNumber) {
+protected Account(String name, String familyName, String userName, String ID, String password, String email, String phoneNumber) {
         this.name = name;
         this.familyName = familyName;
         this.userName = userName;
@@ -26,13 +26,13 @@ public class Account {
 
 
     public static void AddAccount(Account account){
-
+        list.add(account);
     }
-
+    /********************** getter and setter ************/
     public static List<Account> getList() {
         return list;
     }
-/********************** getter and setter ************/
+
     public String getName() {
         return name;
     }
@@ -91,15 +91,12 @@ public class Account {
 
     /***************** edit and remove account*********************/
 
-    public void changeFirstName(String name) {
+    public void editField(String field ,String value) throws FieldDoesNotExist {
+        if ("password".equals(field)){
+            setPassword(value);
+        }
     }
 
-    public void changeLastName(String name) {
-    }
-
-    public void changeEmail(String Email) {
-        this.email = Email;
-    }
     public void removeAccount(Account account){
 
     }
