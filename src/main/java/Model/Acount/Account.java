@@ -1,5 +1,6 @@
 package Model.Acount;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,8 @@ public class Account {
     protected String email;
     protected String phoneNumber;
     protected static List<Account> list = new ArrayList<>();
+    protected LocalDate loginDate;
+    protected LocalDate currentDate;
 
 /*************** constructor **********/
 protected Account(String name, String familyName, String userName, String ID, String password, String email, String phoneNumber) {
@@ -23,7 +26,6 @@ protected Account(String name, String familyName, String userName, String ID, St
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
-
 
     public static void AddAccount(Account account){
         list.add(account);
@@ -89,15 +91,38 @@ protected Account(String name, String familyName, String userName, String ID, St
         this.phoneNumber = phoneNumber;
     }
 
+    public LocalDate getLoginDate() {
+        return loginDate;
+    }
+
+    public LocalDate getCurrentDate() {
+        return currentDate;
+    }
+
+    public static void setList(List<Account> list) {
+        Account.list = list;
+    }
+
+    public void setLoginDate(LocalDate loginDate) {
+        this.loginDate = loginDate;
+    }
+
+    public void setCurrentDate(LocalDate currentDate) {
+        this.currentDate = currentDate;
+    }
+
     /***************** edit and remove account*********************/
 
     public void editField(String field ,String value) throws FieldDoesNotExist {
         if ("password".equals(field)){
             setPassword(value);
+        }else {
+
         }
     }
 
-    public void removeAccount(Account account){
+    public void removeAccount(final Account account){
+        list.removeIf(acc -> account.getID().equals(acc.getID()) );
 
     }
 

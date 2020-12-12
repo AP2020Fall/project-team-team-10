@@ -3,6 +3,7 @@ package Model;
 public class Point {
     public long point;
 
+
     public static long increasePoint(long point){
 
     }

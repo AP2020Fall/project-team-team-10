@@ -2,33 +2,42 @@ package Model;
 
 import Model.Acount.Player;
 
-public class Score {
-    public Player player;
-    public long score;
+import java.util.ArrayList;
+import java.util.List;
 
-    public Score(Player player, long score) {
-        this.player = player;
-        Score = score;
-    }
+public class Score {
+    private long scoreId;
+    private long userId;
+    private static List<Score> list=new ArrayList<>();
+
+
 
 
     public static int increaseScore(int score){
 
     }
 
-    public Player getPlayer() {
-        return player;
+    public long getScoreId() {
+        return scoreId;
     }
 
-    public long getScore() {
-        return Score;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
+    public static List<Score> getList() {
+        return list;
     }
 
-    public void setScore(long score) {
-        Score = score;
+    public void setScoreId(long scoreId) {
+        this.scoreId = scoreId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public static void setList(List<Score> list) {
+        Score.list = list;
     }
 }

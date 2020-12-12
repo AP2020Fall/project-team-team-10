@@ -1,14 +1,21 @@
 package Model;
 
+import Model.Acount.Player;
+
 import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Event {
+    private static List<Player> playerList=new ArrayList<>();
     public String gameName;
     public DateFormat eventDate;
     public DateFormat startEvent;
     public DateFormat endEvent;
     public String eventId;
     public Point point;
+    public List<Event> list =new ArrayList<>();
+
 
     public Event(String gameName, DateFormat eventDate, DateFormat startEvent, DateFormat endEvent, String eventId, Point point) {
         this.gameName = gameName;
@@ -71,11 +78,12 @@ public class Event {
 
     /******* others method ********/
 
-public static String participatingInEvent(String userID){
+public static void participatingInEvent(Player playerId){
+playerList.add(playerId);
 
     }
-public void deleteEvent(Event eventID){
-
+public void deleteEvent(Event event){
+list.removeIf(evt -> event.getEventId().equals(evt.eventId));
 }
 
 

@@ -1,9 +1,14 @@
 package View.AccountMenu;
 
+import Model.Acount.Player;
 import View.Menu;
+
+import java.util.List;
 
 public class PlayerMenu extends Menu {
     private static PlayerMenu menu;
+
+    private static List<Player> playerList;
 
     public void viewPersonalInfo(){
 
