@@ -1,5 +1,7 @@
 package Model;
 
+import Model.Data.Data;
+import Model.Tools.Packable;
 import com.gilecode.yagson.YaGson;
 
 import java.io.File;
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
+import Exception.*;
 
 public class Database {
 
@@ -37,7 +40,7 @@ public class Database {
                     .forEach(data -> {
                         try {
                             list.add(data.getInstance());
-                        } catch (ProductDoesNotExistException | AccountDoesNotExistException | DiscountCodeExpiredException | CategoryDoesNotExistException | CommentDoesNotExistException | OffDoesNotExistException | LogHistoryDoesNotExistException | CartDoesNotExistException e) {
+                        } catch (AccountDoesNotExistException | LogHistoryDoesNotExistException e) {
                             e.printStackTrace();
                         }
                     });
@@ -63,7 +66,7 @@ public class Database {
         save(object);
     }
 
-    public static void save(Packable<?> object) {
+    public static void save(Packable<?>  object) {
 
         File file = new File(getStringObjPath(object));
 
@@ -83,7 +86,7 @@ public class Database {
         }
     }
 
-    public static void remove(Packable<?> object) {
+    public static void remove(Packable<?>  object) {
 
         try {
             Files.delete(Paths.get(getStringObjPath(object)));
@@ -104,5 +107,6 @@ public class Database {
                 , packable.getId()
         );
     }
+
 
 }

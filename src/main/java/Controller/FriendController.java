@@ -1,7 +1,5 @@
 package Controller;
 
-import Model.Friends;
-
 import java.util.List;
 
 public class FriendController {

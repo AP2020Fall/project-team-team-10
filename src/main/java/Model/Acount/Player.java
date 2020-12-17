@@ -1,20 +1,23 @@
 package Model.Acount;
 
-import Model.Friends;
+import Exception.FieldDoesNotExist;
+import Model.Database;
 import Model.Money;
 import Model.Score;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Player extends Account{
     public Score score;
     public Money money;
     private static ArrayList<Player> playerList=new ArrayList<>();
     public List<Player> friends=new ArrayList<Player>();
-    public ArrayList<Friends> reqList=new  ArrayList<Friends>();
 
+/******************************** constructor **********************************************/
 
     public Player(String name, String familyName, String userName, String ID, String password, String email, String phoneNumber, Score score, LoginDay time, Money money, ArrayList<Player> friends, ArrayList<Friends> reqList) {
         super(name, familyName, userName, ID, password, email, phoneNumber);
@@ -25,12 +28,13 @@ public class Player extends Account{
         this.reqList = reqList;
     }
 
-    public Score getScore() {
-        return score;
+    private Player() {
+        super();
     }
 
-    public LoginDay getTime() {
-        return time;
+/**************************** getter and setter *******************************/
+    public Score getScore() {
+        return score;
     }
 
     public Money getMoney() {
@@ -40,11 +44,6 @@ public class Player extends Account{
     public List<Player> getFriends() {
         return friends;
     }
-
-    public ArrayList<Friends> getReqList() {
-        return reqList;
-    }
-
 
     public void setScore(Score score) {
         this.score = score;
@@ -59,14 +58,13 @@ public class Player extends Account{
         this.friends = friends;
     }
 
-    public void setReqList(ArrayList<Friends> reqList) {
-        this.reqList = reqList;
-    }
 
 
+/**************************** method ******************************************************/
     public void addFriends(Player playerID){
         if ("playerID".equals(playerID))
         friends.add(playerID);
+        Database.save(this);
     }
     public static void showUser(){
         playerList.sort(Comparator.comparing(o -> o.userName));
@@ -74,6 +72,36 @@ public class Player extends Account{
             System.out.print(player.userName);
         }
     }
+
+
+    public static List<Player> getAllPlayer() {
+        return list.stream()
+                .filter(account -> account instanceof Player)
+                .map(account -> (Player) account)
+                .collect(Collectors.toList());
+    }
+    @Override
+    public void editField(@NotNull String field, String value) throws FieldDoesNotExist, NumberFormatException {
+
+        switch (field) {
+            case "password" -> setPassword(value);
+            case "firstName" -> setFirstName(value);
+            case "familyName" -> setFamilyName(value);
+            case "userName" -> setUserName(value);
+            case "email" -> setEmail(value);
+            case "phoneNumber" -> setPhoneNumber(value);
+
+
+        }
+
+        Database.save(this);
+    }
+public void addFriend(Account accountId){
+
+}
+/*************************** pack *****************************************************/
+
+
 
 
 }

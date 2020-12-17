@@ -9,21 +9,23 @@ import java.util.List;
 public class Event {
     private static List<Player> playerList=new ArrayList<>();
     public String gameName;
-    public DateFormat eventDate;
     public DateFormat startEvent;
     public DateFormat endEvent;
-    public String eventId;
-    public Point point;
+    public String scoreEvent;
     public List<Event> list =new ArrayList<>();
+    public Long eventId;
 
+ /*************************************** constructor ******************************************/
 
-    public Event(String gameName, DateFormat eventDate, DateFormat startEvent, DateFormat endEvent, String eventId, Point point) {
+    public Event(String gameName, DateFormat startEvent, DateFormat endEvent, String scoreEvent) {
         this.gameName = gameName;
-        this.eventDate = eventDate;
         this.startEvent = startEvent;
         this.endEvent = endEvent;
-        this.eventId = eventId;
-        this.point = point;
+        this.scoreEvent = scoreEvent;
+    }
+
+    public Event() {
+
     }
 
     /********* getter and setter ***************/
@@ -35,7 +37,7 @@ public class Event {
         return eventDate;
     }
 
-    public String getEventId() {
+    public Long getEventId() {
         return eventId;
     }
 
@@ -52,7 +54,7 @@ public class Event {
         this.eventDate = eventDate;
     }
 
-    public void setEventId(String eventId) {
+    public void setEventId(Long eventId) {
         this.eventId = eventId;
     }
 
@@ -83,11 +85,13 @@ playerList.add(playerId);
 
     }
 public void deleteEvent(Event event){
-list.removeIf(evt -> event.getEventId().equals(evt.eventId));
+list.removeIf(evt -> event.getEventId() == evt.eventId);
 }
 
 
+public  void addEvent(String gameName,DateFormat startEvent,DateFormat endEvent,Long score){
 
+}
 
 
 

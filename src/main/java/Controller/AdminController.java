@@ -1,15 +1,34 @@
 package Controller;
 
-import Model.Acount.Player;
-
+import Model.Acount.Account;
+import Model.Suggestion;
+import Exception.*;
 import java.util.List;
 
 public class AdminController  {
-    public List<Player> showPlayer{
+/********************* field **************************************/
+    private static AdminController adminController = new AdminController();
 
-    }
-    public String suggestion(String s){
 
+/*********************instance *************************************/
+
+public static AdminController getInstance() {
+    return adminController;
+}
+
+
+private AdminController(){
+
+}
+/*********************** method *********************************************/
+    public List<Suggestion> suggestionList(){return Suggestion.getSuggestionList();}
+
+
+    public Account viewAccount(String username) throws AccountDoesNotExistException {
+        return Account.getAccountByUserName(username);
     }
+
+
+
 
 }

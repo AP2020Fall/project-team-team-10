@@ -1,42 +1,56 @@
 package Model.Acount;
 
+import Exception.*;
+import Model.Data.Data;
+import Model.Database;
+import Model.Tools.Packable;
+import org.jetbrains.annotations.NotNull;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Account {
-    protected String name;
+public abstract class Account implements Packable<Account> {
+/******************************* field **********************************/
+
+    protected String firstName;
     protected String familyName;
     protected String userName;
-    protected String ID;
+    protected long id;
     protected String password;
     protected String email;
     protected String phoneNumber;
     protected static List<Account> list = new ArrayList<>();
     protected LocalDate loginDate;
     protected LocalDate currentDate;
+    protected static List<Account> inRegistering = new ArrayList<>();
 
-/*************** constructor **********/
+/*********************************** constructor **********************************************/
 protected Account(String name, String familyName, String userName, String ID, String password, String email, String phoneNumber) {
-        this.name = name;
+        this.firstName = name;
         this.familyName = familyName;
         this.userName = userName;
-        this.ID = ID;
+        this.id = id;
         this.password = password;
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
 
-    public static void AddAccount(Account account){
-        list.add(account);
+    public Account() {
+
     }
+    public Account(String userName){
+    this.userName=userName;
+    }
+
+
     /********************** getter and setter ************/
     public static List<Account> getList() {
         return list;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
     public String getFamilyName() {
@@ -47,8 +61,17 @@ protected Account(String name, String familyName, String userName, String ID, St
         return userName;
     }
 
-    public String getID() {
-        return ID;
+    public static List<Account> getInRegistering() {
+        return inRegistering;
+    }
+
+    public static void setInRegistering(List<Account> inRegistering) {
+        Account.inRegistering = inRegistering;
+    }
+
+    @Override
+    public long getId() {
+        return id;
     }
 
     public String getPassword() {
@@ -63,8 +86,8 @@ protected Account(String name, String familyName, String userName, String ID, St
         return phoneNumber;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public void setFamilyName(String familyName) {
@@ -75,8 +98,8 @@ protected Account(String name, String familyName, String userName, String ID, St
         this.userName = userName;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public void setPassword(String password) {
@@ -117,17 +140,73 @@ protected Account(String name, String familyName, String userName, String ID, St
         if ("password".equals(field)){
             setPassword(value);
         }else {
+            switch (field){
+                case "firstName" -> setFirstName(value);
+                case "familyName" -> setFamilyName(value);
+                case "userName" -> setUserName(value);
+                case "email" -> setEmail(value);
+                case "phoneNumber" -> setPhoneNumber(value);
+            }
 
         }
+       Database.save(this);
     }
 
-    public void removeAccount(final Account account){
-        list.removeIf(acc -> account.getID().equals(acc.getID()) );
+    public void removeAccount(Account account){
+        list.removeIf(acc -> account.getId() == acc.getId() );
+        Database.remove(account);
 
+    }
+    public void addAccount(Account account){
+        list.add(account);
+        Database.save(account,true);
+    }
+
+    public static boolean isThereAnyInRegisteringWithThisUsername(String username) {
+        return inRegistering.stream().anyMatch(account -> username.equals(account.getUserName()));
+    }
+
+    public static Account getAccountByUserName(String name) throws AccountDoesNotExistException {
+        return list.stream()
+                .filter(account -> name.equals(account.getUserName()))
+                .findFirst()
+                .orElseThrow(() -> new AccountDoesNotExistException(
+                        "The username:" + name + " not exist in all account list."
+                ));
     }
 
 
+/****************************************** pack *****************************************/
+@Override
+public Account dpkg(@NotNull Data<Account> data) throws LogHistoryDoesNotExistException {
+    this.id = (long) data.getFields().get(0);
+    this.userName = (String) data.getFields().get(1);
+    this.password = (String) data.getFields().get(2);
 
+    return this;
+}
 
+    @Override
+    public Data<Account> pack() {
+        return new Data<Account>()
+                .addField(id)
+                .addField(userName)
+                .addField(password);
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "firstName='" + firstName + '\'' +
+                ", familyName='" + familyName + '\'' +
+                ", userName='" + userName + '\'' +
+                ", id=" + id +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", loginDate=" + loginDate +
+                ", currentDate=" + currentDate +
+                '}';
+    }
 }
 

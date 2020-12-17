@@ -6,6 +6,9 @@ import java.awt.*;
 import java.util.List;
 
 public class PlayerController {
+    private static PlayerController playerController=new PlayerController();
+
+    public static PlayerController getInstance(){return playerController}
 
     public static PlayerController lastPlayed(){
 
