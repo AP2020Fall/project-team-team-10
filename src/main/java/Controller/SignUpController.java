@@ -1,5 +1,6 @@
 package Controller;
 
+import Exception.*;
 import Controller.Interface.RegisterAndLogIn;
 import Model.Acount.Account;
 import Model.Acount.Admin;
@@ -7,7 +8,7 @@ import Model.Acount.Player;
 
 public class SignUpController {
 /********************************field *******************************/
-    public SignUpController signUpController=new SignUpController();
+    public static SignUpController signUpController=new SignUpController();
 
 /****************************** method *******************************/
  public Account creatTheAccount(String type,String username) throws UserNameInvalidException, UserNameTooShortException, TypeInvalid, MoreThanOneAdmin, ThisAccountAlreadyTakenException {
@@ -39,5 +40,20 @@ public class SignUpController {
     }
     return account;
  }
+public void creatPassword(Account account,String password) throws PasswordException {
+    RegisterAndLogIn.RegisterValidation registerValidation=RegisterAndLogIn.isPassword(password).get();
+
+    if (registerValidation == RegisterAndLogIn.RegisterValidation.IS_NOT_A_VALID_PASS){
+        throw new PasswordException("your Password is invalid");
+    }
+    account.setPassword(password);
+}
+/*******************************instance ******************************/
+private SignUpController(){
+
+}
+public static SignUpController getInstance(){
+    return signUpController;
+}
 
 }

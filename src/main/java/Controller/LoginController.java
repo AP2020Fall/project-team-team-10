@@ -1,6 +1,6 @@
 package Controller;
 
-
+import Exception.*;
 import Controller.Interface.RegisterAndLogIn;
 import Model.Acount.Account;
 

@@ -141,11 +141,20 @@ protected Account(String name, String familyName, String userName, String ID, St
             setPassword(value);
         }else {
             switch (field){
-                case "firstName" -> setFirstName(value);
-                case "familyName" -> setFamilyName(value);
-                case "userName" -> setUserName(value);
-                case "email" -> setEmail(value);
-                case "phoneNumber" -> setPhoneNumber(value);
+                case "firstName":
+                    setFirstName(value);
+                    break;
+                case "familyName" :
+                    setFamilyName(value);
+                    break;
+                case "userName" :
+                    setUserName(value);
+                    break;
+                case "email":
+                    setEmail(value);
+                    break;
+                case "phoneNumber":
+                    setPhoneNumber(value);
             }
 
         }

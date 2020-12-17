@@ -17,15 +17,28 @@ public class Player extends Account{
     private static ArrayList<Player> playerList=new ArrayList<>();
     public List<Player> friends=new ArrayList<Player>();
 
-/******************************** constructor **********************************************/
 
-    public Player(String name, String familyName, String userName, String ID, String password, String email, String phoneNumber, Score score, LoginDay time, Money money, ArrayList<Player> friends, ArrayList<Friends> reqList) {
+
+    /******************************** constructor **********************************************/
+
+    public Player(String name, String familyName, String userName, String ID, String password, String email, String phoneNumber, Score score, Money money, List<Player> friends) {
         super(name, familyName, userName, ID, password, email, phoneNumber);
         this.score = score;
-        this.time = time;
         this.money = money;
         this.friends = friends;
-        this.reqList = reqList;
+    }
+
+    public Player(Score score, Money money, List<Player> friends) {
+        this.score = score;
+        this.money = money;
+        this.friends = friends;
+    }
+
+    public Player(String userName, Score score, Money money, List<Player> friends) {
+        super(userName);
+        this.score = score;
+        this.money = money;
+        this.friends = friends;
     }
 
     private Player() {
@@ -84,22 +97,33 @@ public class Player extends Account{
                 .map(account -> (Player) account)
                 .collect(Collectors.toList());
     }
+
     @Override
-    public void editField(@NotNull String field, String value) throws FieldDoesNotExist, NumberFormatException {
+    public void editField(String field, String value) throws FieldDoesNotExist, NumberFormatException {
+        if ("password".equals(field)) {
+            setPassword(value);
+        } else {
+            switch (field) {
+                case "firstName":
+                    setFirstName(value);
+                    break;
+                case "familyName":
+                    setFamilyName(value);
+                    break;
+                case "userName":
+                    setUserName(value);
+                    break;
+                case "email":
+                    setEmail(value);
+                    break;
+                case "phoneNumber":
+                    setPhoneNumber(value);
+            }
 
-        switch (field) {
-            case "password" -> setPassword(value);
-            case "firstName" -> setFirstName(value);
-            case "familyName" -> setFamilyName(value);
-            case "userName" -> setUserName(value);
-            case "email" -> setEmail(value);
-            case "phoneNumber" -> setPhoneNumber(value);
-
-
+            Database.save(this);
         }
-
-        Database.save(this);
     }
+
 public void addFriend(Account accountId){
 
 }
