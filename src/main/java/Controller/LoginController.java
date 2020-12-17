@@ -33,18 +33,19 @@ public class LoginController {
 
         return account;
     }
-    public void login(String username, String password) throws PasswordException {
-        if (checkFormat(username)){
 
-        }
 
-    }
 
-    public static LoginController getInstance() {
-        return loginController;
-    }
 
     private static boolean checkFormat(String string) {
         return string.matches("([0-9a-zA-Z_])+");
     }
+ /*********************************instance ********************************/
+ public static LoginController getInstance() {
+     return loginController;
+ }
+
+      public LoginController(){
+
+ }
 }

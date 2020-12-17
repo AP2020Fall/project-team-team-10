@@ -32,7 +32,11 @@ public class Player extends Account{
         super();
     }
 
-/**************************** getter and setter *******************************/
+    public Player(String username) {
+         super(username);
+    }
+
+    /**************************** getter and setter *******************************/
     public Score getScore() {
         return score;
     }
