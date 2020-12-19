@@ -96,7 +96,7 @@ public class Suggestion implements Packable<Suggestion> {
     public long getId() {
         return 0;
     }
-/********************* constructor****************/
+/******************************** constructor*********************************/
     public Suggestion(long suggestionId, long accountId, long gameId) {
         this.suggestionId = suggestionId;
         this.accountId = accountId;

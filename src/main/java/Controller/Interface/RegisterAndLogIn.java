@@ -39,6 +39,12 @@ public interface RegisterAndLogIn extends Supplier<RegisterAndLogIn.RegisterVali
                         RegisterValidation.IS_VALID : RegisterValidation.IS_NOT_A_VALID_USERNAME_TOO_SHORT
                 : RegisterValidation.IS_NOT_A_VALID_USERNAME_CHAR;
     }
+    default RegisterAndLogIn and (RegisterAndLogIn after) {
+        return () -> {
+            RegisterValidation registerValidation = this.get();
+            return registerValidation == RegisterValidation.IS_VALID ? after.get() : registerValidation;
+        };
+    }
 
     public enum RegisterValidation {
         IS_NOT_A_VALID_EMAIL, IS_NOT_A_VALID_FIRST_NAME,

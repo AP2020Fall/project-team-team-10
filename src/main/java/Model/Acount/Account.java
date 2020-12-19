@@ -36,6 +36,13 @@ protected Account(String name, String familyName, String userName, String ID, St
         this.phoneNumber = phoneNumber;
     }
 
+    public Account(String firstName, String familyName, String email, String phoneNumber) {
+        this.firstName = firstName;
+        this.familyName = familyName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+
     public Account() {
 
     }
@@ -166,7 +173,7 @@ protected Account(String name, String familyName, String userName, String ID, St
         Database.remove(account);
 
     }
-    public void addAccount(Account account){
+    public static void addAccount(Account account){
         list.add(account);
         Database.save(account,true);
     }
@@ -184,6 +191,18 @@ protected Account(String name, String familyName, String userName, String ID, St
                 ));
     }
 
+
+    public void finishRegistering(Account account) {
+        Account.removeFromInRegistering(account);
+    }
+
+    public static void removeFromInRegistering(Account account) {
+        inRegistering.remove(account);
+    }
+
+    public static void addToInRegisteringList(Account account) {
+        inRegistering.add(account);
+    }
 
 /****************************************** pack *****************************************/
 @Override
