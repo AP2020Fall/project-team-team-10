@@ -10,10 +10,8 @@ public class Admin extends Account{
 /************************************* constructor *************************************************************/
    public Admin(String userName){
        super(userName);
-
    }
     private Admin(){
-
     }
 /*************************************** method ***************************************************/
     public static boolean isThereAnyAdmin(){
@@ -33,4 +31,5 @@ public class Admin extends Account{
 public Data<Account> pack() {
     return super.pack().setInstance(new Admin());
 }
+
 }

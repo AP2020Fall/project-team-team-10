@@ -1,7 +1,8 @@
 package Controller;
 
+import Exception.FieldDoesNotExist;
 import Model.Acount.Account;
-import Exception.*;
+
 import java.util.List;
 
 public class AccountController {
@@ -16,13 +17,8 @@ public class AccountController {
     }
 
 
-    public String viewPersonalInfo(){
-       return controllerSection.getAccount()
-        controllerSection.getAccount().getFamilyName()
-        controllerSection.getAccount().getPhoneNumber()
-        controllerSection.getAccount().getEmail()
-        controllerSection.getAccount().getUserName()
-
+    public void viewPersonalInfo(){
+        controllerSection.getAccount().toString();
 
     }
 

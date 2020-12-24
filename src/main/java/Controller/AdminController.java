@@ -1,13 +1,13 @@
 package Controller;
 
+import Exception.AccountDoesNotExistException;
 import Model.Acount.Account;
-import Model.Suggestion;
-import Exception.*;
-import java.util.List;
+import Model.Game;
 
 public class AdminController  {
 /********************* field **************************************/
     private static AdminController adminController = new AdminController();
+    protected ControllerSection controllerSection=new ControllerSection();
 
 
 /*********************instance *************************************/
@@ -21,7 +21,12 @@ private AdminController(){
 
 }
 /*********************** method *********************************************/
-    public List<Suggestion> suggestionList(){return Suggestion.getSuggestionList();}
+    public void addSuggestion(Account accountId, Game gameID){
+        controllerSection.getSuggestion().addSuggestion(accountId,gameID);
+    }
+    public void removeSuggestion(Account account,Game gameId){
+        controllerSection.getSuggestion().removeSuggestion(account,gameId);
+    }
 
 
     public Account viewAccount(String username) throws AccountDoesNotExistException {

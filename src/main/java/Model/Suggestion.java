@@ -23,9 +23,10 @@ public class Suggestion implements Packable<Suggestion> {
         suggestionGameHashMap.put(getAccountId(),getGameId());
         Database.save(this);
     }
-    public void removeSuggestion(Suggestion suggestion){
-        suggestionList.removeIf(sug -> suggestion.getSuggestionId()== sug.getSuggestionId());
+    public void removeSuggestion(Account account,Game gameId){
+        suggestionGameHashMap.remove(account,gameId);
         Database.remove(this);
+
 
     }
 
