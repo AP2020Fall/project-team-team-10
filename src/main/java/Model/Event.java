@@ -28,38 +28,21 @@ public class Event {
 
     }
 
-    /********* getter and setter ***************/
+    /******************** getter and setter *********************************/
     public String getGameName() {
         return gameName;
-    }
-
-    public DateFormat getEventDate() {
-        return eventDate;
     }
 
     public Long getEventId() {
         return eventId;
     }
 
-    public Point getPoint() {
-        return point;
-    }
-
-
     public void setGameName(String gameName) {
         this.gameName = gameName;
     }
 
-    public void setEventDate(DateFormat eventDate) {
-        this.eventDate = eventDate;
-    }
-
     public void setEventId(Long eventId) {
         this.eventId = eventId;
-    }
-
-    public void setPoint(Point point) {
-        this.point = point;
     }
 
     public DateFormat getStartEvent() {
@@ -78,7 +61,7 @@ public class Event {
         this.endEvent = endEvent;
     }
 
-    /******* others method ********/
+    /************************ others method ****************************************/
 
 public static void participatingInEvent(Player playerId){
 playerList.add(playerId);

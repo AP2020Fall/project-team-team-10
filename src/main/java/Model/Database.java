@@ -40,7 +40,7 @@ public class Database {
                     .forEach(data -> {
                         try {
                             list.add(data.getInstance());
-                        } catch (AccountDoesNotExistException | LogHistoryDoesNotExistException e) {
+                        } catch (AccountDoesNotExistException | LogHistoryDoesNotExistException |FieldDoesNotExist e) {
                             e.printStackTrace();
                         }
                     });
@@ -97,13 +97,13 @@ public class Database {
 
 
     private static String getStringPath( String className) {
-        return String.format("src/main/resources/DataBase/%s-src", (className.matches("^(Seller|Customer|Manager)$")) ? "Account" : className);
+        return String.format("src/main/resources/DataBase/%s-src", (className.matches("^(Player|Admin)$")) ? "Account" : className);
     }
 
     private static String getStringObjPath( Packable<?> packable) {
         String className = packable.getClass().getSimpleName();
         return String.format("src/main/resources/DataBase/%s-src/%d.json"
-                , (className.matches("^(Seller|Customer|Manager)$")) ? "Account" : className
+                , (className.matches("^(Player|Admin)$")) ? "Account" : className
                 , packable.getId()
         );
     }

@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Acount.Account;
+import Model.Acount.Player;
 import Model.Event;
 import Model.Game;
 import Model.Suggestion;
@@ -13,6 +14,7 @@ public class ControllerSection {
     private Event currentEvent;
     private Game currentGame;
     private Suggestion suggestion;
+    private Player player;
 
 
     public static ControllerSection getInstance() {
@@ -35,6 +37,10 @@ public class ControllerSection {
         return account;
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
     public Event getCurrentEvent() {
         return currentEvent;
     }
@@ -45,6 +51,10 @@ public class ControllerSection {
 
     public void setCurrentEvent(Event currentEvent) {
         this.currentEvent = currentEvent;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 
     public void setCurrentGame(Game currentGame) {

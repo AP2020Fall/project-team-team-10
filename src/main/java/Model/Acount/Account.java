@@ -51,7 +51,7 @@ protected Account(String name, String familyName, String userName, String ID, St
     }
 
 
-    /********************** getter and setter ************/
+    /************************* getter and setter *****************************/
     public static List<Account> getList() {
         return list;
     }
@@ -202,6 +202,15 @@ protected Account(String name, String familyName, String userName, String ID, St
 
     public static void addToInRegisteringList(Account account) {
         inRegistering.add(account);
+    }
+
+
+    public static boolean isThereAnyAccountWithThisUsername(String username) {
+        return list.stream().anyMatch(account -> username.equals(account.getUserName()));
+    }
+
+    public static boolean isThereAnyAccountWithThisAccountId(Account accountId){
+        return list.stream().anyMatch((account -> accountId.getId()== account.getId()));
     }
 
 /****************************************** pack *****************************************/
