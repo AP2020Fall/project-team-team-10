@@ -7,8 +7,10 @@ import java.util.List;
 
 public class PlayerController {
     private static PlayerController playerController=new PlayerController();
+    protected ControllerSection controllerSection =new ControllerSection();
 
-    public static PlayerController getInstance(){return playerController}
+    public static PlayerController getInstance(){return playerController ;}
+
 
     public static PlayerController lastPlayed(){
 
@@ -18,12 +20,5 @@ public class PlayerController {
 
     }
 
-    public List<Player> viewUser(){
-
-    }
-
-    public List<Player> searchFriend(){
-
-    }
 
 }
