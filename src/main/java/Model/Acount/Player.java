@@ -1,8 +1,8 @@
 package Model.Acount;
 
-import Exception.*;
 import Exception.AccountDoesNotExistException;
 import Exception.FieldDoesNotExist;
+import Exception.GameInvalidName;
 import Model.Database;
 import Model.Game;
 import Model.Money;
@@ -170,14 +170,32 @@ public class Player extends Account{
     }
 
 
-public void addFriend(Account accountId) throws AccountDoesNotExistException {
-    if (Account.isThereAnyAccountWithThisAccountId(accountId)) {
+public  void addToRequest(Account username,Account friendUsername) throws AccountDoesNotExistException {
+    if (Account.isThereAnyAccountWithThisAccountId(friendUsername)) {
+        requestList.add(username);
+    }else
+        throw new AccountDoesNotExistException("THERE IS NO ACCOUNT WITH THIS USERNAME");
 
-
-    }
 
 }
+public boolean acceptRequest(String s){
+       if (s.matches("accept")){
+           return true;
+       }else
+           return false;
+}
+public boolean declineRequest(String s){
+        if (s.matches("decline")){
+            return true
+        }else
+            return false;
+}
 
+
+
+public void addToFriendList(Account username,Account friendUsername){
+        if ()
+}
 
 
 
