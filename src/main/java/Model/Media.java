@@ -4,6 +4,9 @@ import Exception.MediaNotFound;
 import Model.Data.Data;
 import Model.Tools.AddingNew;
 import Model.Tools.Packable;
+import com.sun.media.jfxmedia.MediaPlayer;
+import javafx.scene.image.Image;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -15,33 +18,37 @@ public class Media implements Packable<Media> {
     private String playerSrc;
 
     /***************************** getter and setter ***********************************/
+    public Media() {
+    }
+
+
     public static List<Media> getList() {
         return list;
     }
 
-    @Override
-    public long getId() {
-        return id;
+    @NotNull
+    @Contract("_ -> new")
+    public static Image getImage(String src) {
+        return new Image(src);
     }
+
+    @NotNull
+    @Contract("_ -> new")
+    public static MediaPlayer getMediaPlayer(String src) {
+        return new MediaPlayer(new Media(src));
+    }
+
 
     public String getImageSrc() {
         return imageSrc;
     }
 
-    public String getPlayerSrc() {
-        return playerSrc;
-    }
-
-    public static void setList(List<Media> list) {
-        Media.list = list;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public void setImageSrc(String imageSrc) {
         this.imageSrc = imageSrc;
+    }
+
+    public String getPlayerSrc() {
+        return playerSrc;
     }
 
     public void setPlayerSrc(String playerSrc) {
@@ -84,5 +91,14 @@ public class Media implements Packable<Media> {
         this.imageSrc = (String) data.getFields().get(1);
         this.playerSrc = (String) data.getFields().get(2);
         return this;
+    }
+
+    @Override
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

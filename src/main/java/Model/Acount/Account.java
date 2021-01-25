@@ -16,6 +16,7 @@ import java.util.List;
 public abstract class Account implements Packable<Account> {
     /******************************* field **********************************/
 
+    protected long mediaId;
     protected Info personalInfo;
     protected String firstName;
     protected String familyName;
@@ -152,6 +153,14 @@ public abstract class Account implements Packable<Account> {
 
     public void setPersonalInfo(Info personalInfo) {
         this.personalInfo = personalInfo;
+    }
+
+    public long getMediaId() {
+        return mediaId;
+    }
+
+    public void setMediaId(long mediaId) {
+        this.mediaId = mediaId;
     }
 
     /***************** edit and remove account*********************/

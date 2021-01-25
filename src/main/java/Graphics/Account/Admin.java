@@ -1,12 +1,15 @@
 package Graphics.Account;
 
+import Exception.*;
 import Controller.ControllerSection;
 import Exception.FieldDoesNotExist;
 import Graphics.Interface.SceneBuilder;
+import Model.Media;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 
@@ -16,7 +19,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Admin implements SceneBuilder {
-    private Model.Acount.Admin admin =(Model.Acount.Admin) ControllerSection.getInstance().getAccount();
+    private Model.Acount.Admin admin = (Model.Acount.Admin) ControllerSection.getInstance().getAccount();
     private File selectedImage;
 
 
@@ -39,7 +42,7 @@ public class Admin implements SceneBuilder {
     public Scene sceneBuilder() {
 
         try {
-            return FXMLLoader.load(new File("src/main/resources/Graphics/Account/ManagerAccount.fxml").toURI().toURL());
+            return FXMLLoader.load(new File("src/main/resources/").toURI().toURL());
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(0);
@@ -47,7 +50,7 @@ public class Admin implements SceneBuilder {
         return null;
     }
 
-    @Override
+
     public void initialize(URL location, ResourceBundle resources) {
 
         try {
@@ -59,9 +62,9 @@ public class Admin implements SceneBuilder {
             Email.setText(admin.getPersonalInfo().getList().getFieldByName("Email").getString());
 
             if (admin.getMediaId() != 0) {
-                manager_image.setImage(Medias.getImage(Medias.getMediasById(admin.getMediaId()).getImageSrc()));
+                manager_image.setImage(Media.getImage(Media.getMediasById(admin.getMediaId()).getImageSrc()));
             }
-        } catch (FieldDoesNotExist e) {
+        } catch (FieldDoesNotExist | MediaNotFound e) {
             e.printStackTrace();
         }
     }

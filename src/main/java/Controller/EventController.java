@@ -1,22 +1,20 @@
 package Controller;
 
-import Model.Event;
-
 public class EventController {
 
-    public Event addEvent(){
+    public void  addEvent(){
 
     }
 
-    public Event showEvent(){
+    public void showEvent(){
 
     }
 
-    public Event editEvent(){
+    public void editEvent(){
 
     }
 
-    public Event removeEdit(){
+    public void removeEdit(){
 
     }
 }
