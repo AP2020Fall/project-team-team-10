@@ -1,13 +1,14 @@
 package Graphics.Account;
 
-import Exception.*;
 import Controller.ControllerSection;
+import Exception.FieldDoesNotExist;
 import Graphics.Interface.SceneBuilder;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.IOException;
@@ -63,6 +64,14 @@ public class Admin implements SceneBuilder {
         } catch (FieldDoesNotExist e) {
             e.printStackTrace();
         }
+    }
+
+    public void ChoosePhoto() {
+        FileChooser fc = new FileChooser();
+        fc.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("image", "*.jpg", "*.png"));
+        selectedImage = fc.showOpenDialog(null);
+        Image value = new Image(selectedImage.toURI().toString());
+        manager_image.setImage(value);
     }
 
 
