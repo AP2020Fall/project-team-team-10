@@ -5,6 +5,7 @@ import Exception.FieldDoesNotExist;
 import Exception.LogHistoryDoesNotExistException;
 import Model.Data.Data;
 import Model.Database;
+import Model.Info;
 import Model.Tools.Packable;
 import org.jetbrains.annotations.NotNull;
 
@@ -13,8 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Account implements Packable<Account> {
-/******************************* field **********************************/
+    /******************************* field **********************************/
 
+    protected Info personalInfo;
     protected String firstName;
     protected String familyName;
     protected String userName;
@@ -27,8 +29,8 @@ public abstract class Account implements Packable<Account> {
     protected LocalDate currentDate;
     protected static List<Account> inRegistering = new ArrayList<>();
 
-/*********************************** constructor **********************************************/
-protected Account(String name, String familyName, String userName, String ID, String password, String email, String phoneNumber) {
+    /*********************************** constructor **********************************************/
+    protected Account(String name, String familyName, String userName, String ID, String password, String email, String phoneNumber) {
         this.firstName = name;
         this.familyName = familyName;
         this.userName = userName;
@@ -48,8 +50,9 @@ protected Account(String name, String familyName, String userName, String ID, St
     public Account() {
 
     }
-    public Account(String userName){
-    this.userName=userName;
+
+    public Account(String userName) {
+        this.userName = userName;
     }
 
 
@@ -143,20 +146,28 @@ protected Account(String name, String familyName, String userName, String ID, St
         this.currentDate = currentDate;
     }
 
+    public Info getPersonalInfo() {
+        return personalInfo;
+    }
+
+    public void setPersonalInfo(Info personalInfo) {
+        this.personalInfo = personalInfo;
+    }
+
     /***************** edit and remove account*********************/
 
-    public void editField(String field ,String value) throws FieldDoesNotExist {
-        if ("password".equals(field)){
+    public void editField(String field, String value) throws FieldDoesNotExist {
+        if ("password".equals(field)) {
             setPassword(value);
-        }else {
-            switch (field){
+        } else {
+            switch (field) {
                 case "firstName":
                     setFirstName(value);
                     break;
-                case "familyName" :
+                case "familyName":
                     setFamilyName(value);
                     break;
-                case "userName" :
+                case "userName":
                     setUserName(value);
                     break;
                 case "email":
@@ -167,17 +178,18 @@ protected Account(String name, String familyName, String userName, String ID, St
             }
 
         }
-       Database.save(this);
+        Database.save(this);
     }
 
-    public void removeAccount(Account account){
-        list.removeIf(acc -> account.getId() == acc.getId() );
+    public void removeAccount(Account account) {
+        list.removeIf(acc -> account.getId() == acc.getId());
         Database.remove(account);
 
     }
-    public static void addAccount(Account account){
+
+    public static void addAccount(Account account) {
         list.add(account);
-        Database.save(account,true);
+        Database.save(account, true);
     }
 
     public static boolean isThereAnyInRegisteringWithThisUsername(String username) {
@@ -211,19 +223,19 @@ protected Account(String name, String familyName, String userName, String ID, St
         return list.stream().anyMatch(account -> username.equals(account.getUserName()));
     }
 
-    public static boolean isThereAnyAccountWithThisAccountId(Account accountId){
-        return list.stream().anyMatch((account -> accountId.getId()== account.getId()));
+    public static boolean isThereAnyAccountWithThisAccountId(Account accountId) {
+        return list.stream().anyMatch((account -> accountId.getId() == account.getId()));
     }
 
-/****************************************** pack *****************************************/
-@Override
-public Account dpkg(@NotNull Data<Account> data) throws LogHistoryDoesNotExistException {
-    this.id = (long) data.getFields().get(0);
-    this.userName = (String) data.getFields().get(1);
-    this.password = (String) data.getFields().get(2);
+    /****************************************** pack *****************************************/
+    @Override
+    public Account dpkg(@NotNull Data<Account> data) throws LogHistoryDoesNotExistException {
+        this.id = (long) data.getFields().get(0);
+        this.userName = (String) data.getFields().get(1);
+        this.password = (String) data.getFields().get(2);
 
-    return this;
-}
+        return this;
+    }
 
     @Override
     public Data<Account> pack() {

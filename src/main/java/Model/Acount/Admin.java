@@ -24,7 +24,6 @@ public class Admin extends Account{
     }
      public void addSuggestion(Account accountId,Game gameId){
 
-
      }
 /**************************** pack ******************************************/
 @Override
